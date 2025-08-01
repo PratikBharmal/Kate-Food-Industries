@@ -1,0 +1,117 @@
+<!-- popup.html -->
+<div id="popup-banner">
+    <div class="popup-content">
+        <div class="popup-banner-image"></div>
+        <button id="close-btn" class="close-btn">✖</button>
+        <h2>
+            Strawberries Out of Stock 🍓
+        </h2>
+        
+        <p>Oops! Our fresh strawberries are currently unavailable. We’ll restock soon! <br>
+            <span class="highlight">Thank you for your love and support for this season 💚</span>
+        </p>
+        
+    </div>
+</div>
+
+<style>
+      /* Centered Popup */
+      #popup-banner {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px;  /* Adjust size */
+      height: auto;
+      background: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      border-radius: 12px;
+      z-index: 9999;
+      display: none;  /* Hidden by default */
+      animation: fadeIn 0.5s ease-in-out;
+  }
+
+  /* Popup Content */
+  .popup-content {
+      text-align: center;
+      padding: 30px 20px;
+  }
+
+  /* Background Image */
+  .popup-banner-image {
+      background: url('/assets/img/products/ban1.webp') no-repeat center center/cover;
+      height: 160px;
+      width: 100%;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+  }
+
+  h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 24px;
+      color: #e74c3c;  /* Strawberry red */
+      margin: 20px 0 10px;
+  }
+
+  p {
+      font-family: 'Roboto', sans-serif;
+      font-size: 16px;
+      color: #555;
+  }
+
+  /* Close Button */
+  .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #ff4d4d;
+      color: #fff;
+      border: none;
+      font-size: 14px;
+      padding: 6px 12px;
+      border-radius: 100%;
+      cursor: pointer;
+      transition: 0.3s;
+  }
+
+  .close-btn:hover {
+      background: #d9534f;
+  }
+
+  /* Button Style */
+  .notify-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 16px;
+      color: #fff;
+      background: #27ae60;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: 0.3s;
+  }
+
+  .notify-btn:hover {
+      background: #2ecc71;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+      from {
+          opacity: 0;
+          transform: translate(-50%, -60%);
+      }
+      to {
+          opacity: 1;
+          transform: translate(-50%, -50%);
+      }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+      #popup-banner {
+          width: 90%;
+      }
+  }
+</style>
