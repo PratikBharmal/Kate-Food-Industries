@@ -315,7 +315,7 @@
 						<li><a href="https://www.instagram.com/katefoodindustries/"
 								target="_blank"><i class="fab fa-instagram"></i></a></li>
 
-						<li><a href="https://wa.me/?text=Grab%20this%20Offer:%20https://ourfamilyfarm.in/strawberry-product.html"
+						<li><a href="#"
 								target="_blank"><i class="fab fa-whatsapp"></i></a></li>
 
 					</ul>
@@ -384,7 +384,7 @@
 			productDetails += "```"; // End WhatsApp message in monospace format
 
 			// Construct WhatsApp message
-			const whatsappMessage = `------------*Order Details*------------\n\nName: ${name}\nEmail: ${email}\nAddress: ${address}\nPhone: ${phone}\n${productDetails}\nSubtotal: ${subtotal}\nShipping: ${shipping}\nTotal: ${total}\n-----------------------------\nMessage: ${message}`;
+			const whatsappMessage = `------*Order Details*------\n\nName: ${name}\nEmail: ${email}\nAddress: ${address}\nPhone: ${phone}\n${productDetails}\nSubtotal: ${subtotal}\nShipping: ${shipping}\nTotal: ${total}\n-----------------------------\nMessage: ${message}`;
 			const whatsappLink = `https://api.whatsapp.com/send?phone=919421180494&text=${encodeURIComponent(whatsappMessage)}`;
 			window.open(whatsappLink, '_blank'); // Redirect to WhatsApp
 
