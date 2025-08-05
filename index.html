@@ -85,6 +85,13 @@
 	<!-- responsive -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
 
+	<!-- Fancybox CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
+
+	<!-- Fancybox JS -->
+	<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
+
+
 	<!-- Structured Data (JSON-LD) -->
 	<script type="application/ld+json">
     {
@@ -443,8 +450,8 @@
 				<div class="col-lg-6 col-md-12">
 					<div class="abt-bg">
 
-						<a href="./assets/videos/bananChips.mp4" onclick="return false;"
-							class="video-play-btn popup-youtube" data-fancybox="video">
+						<a data-fancybox data-src="./assets/videos/bananChips.mp4" data-type="video"
+							class="video-play-btn">
 							<i class="fas fa-play"></i>
 						</a>
 

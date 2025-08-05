@@ -701,50 +701,50 @@
       });
 
     //   Team animation JS is added
-    document.addEventListener("DOMContentLoaded", function () {
-        const teamItems = document.querySelectorAll(".single-team-item");
+    // document.addEventListener("DOMContentLoaded", function () {
+    //     const teamItems = document.querySelectorAll(".single-team-item");
 
-        // 👀 Fade-in Effect on Scroll (Optimized with requestAnimationFrame)
-        function revealOnScroll() {
-            requestAnimationFrame(() => {
-                teamItems.forEach(item => {
-                    const position = item.getBoundingClientRect().top;
-                    const windowHeight = window.innerHeight;
-                    if (position < windowHeight - 50) {
-                        item.classList.add("visible");
-                    }
-                });
-            });
-        }
+    //     // 👀 Fade-in Effect on Scroll (Optimized with requestAnimationFrame)
+    //     function revealOnScroll() {
+    //         requestAnimationFrame(() => {
+    //             teamItems.forEach(item => {
+    //                 const position = item.getBoundingClientRect().top;
+    //                 const windowHeight = window.innerHeight;
+    //                 if (position < windowHeight - 50) {
+    //                     item.classList.add("visible");
+    //                 }
+    //             });
+    //         });
+    //     }
 
-        window.addEventListener("scroll", revealOnScroll);
-        revealOnScroll(); // Trigger on load
+    //     window.addEventListener("scroll", revealOnScroll);
+    //     revealOnScroll(); // Trigger on load
 
-        // 🔄 Shuffle Animation (Improved)
-        function shuffleTeam() {
-            const container = document.querySelector(".team-container");
-            const items = Array.from(container.children);
+    //     // 🔄 Shuffle Animation (Improved)
+    //     function shuffleTeam() {
+    //         const container = document.querySelector(".team-container");
+    //         const items = Array.from(container.children);
 
-            // Add fade-out effect
-            items.forEach(item => item.classList.add("shuffle-hidden"));
+    //         // Add fade-out effect
+    //         items.forEach(item => item.classList.add("shuffle-hidden"));
 
-            setTimeout(() => {
-                // Shuffle the array
-                const shuffledItems = [...items].sort(() => Math.random() - 0.5);
+    //         setTimeout(() => {
+    //             // Shuffle the array
+    //             const shuffledItems = [...items].sort(() => Math.random() - 0.5);
 
-                // Re-append in shuffled order without removing innerHTML
-                shuffledItems.forEach(item => container.appendChild(item));
+    //             // Re-append in shuffled order without removing innerHTML
+    //             shuffledItems.forEach(item => container.appendChild(item));
 
-                // Fade-in after shuffle
-                setTimeout(() => {
-                    shuffledItems.forEach(item => item.classList.remove("shuffle-hidden"));
-                }, 200);
-            }, 500);
-        }
+    //             // Fade-in after shuffle
+    //             setTimeout(() => {
+    //                 shuffledItems.forEach(item => item.classList.remove("shuffle-hidden"));
+    //             }, 200);
+    //         }, 500);
+    //     }
 
-        // 🔄 Shuffle every 3 seconds
-        setInterval(shuffleTeam, 3000);
-    });
+    //     // 🔄 Shuffle every 3 seconds
+    //     setInterval(shuffleTeam, 3000);
+    // });
 
 // stock is not available popup for user start
  // Function to load the popup from popup.html
