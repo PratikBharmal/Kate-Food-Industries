@@ -447,100 +447,62 @@
 	<script src="assets/js/main.js"></script>
 
 	<script>
-
 		function submitForm(event) {
 			event.preventDefault();
-
-			// Clear previous errors
-			document.getElementById("name-error").textContent = "";
-			document.getElementById("email-error").textContent = "";
-			document.getElementById("phone-error").textContent = "";
-			document.getElementById("subject-error").textContent = "";
-			document.getElementById("message-error").textContent = "";
-			document.getElementById("statusMessage").textContent = "";
-
+		
 			// Get field values
 			const name = document.getElementById("name").value.trim();
 			const email = document.getElementById("email").value.trim();
 			const phone = document.getElementById("phone").value.trim();
 			const subject = document.getElementById("subject").value.trim();
 			const message = document.getElementById("message").value.trim();
-
-			let isValid = true;
-
-			// Basic validation
-			if (!name) {
-				document.getElementById("name-error").textContent = "Name is required.";
-				isValid = false;
-			}
-			if (!email) {
-				document.getElementById("email-error").textContent = "Email is required.";
-				isValid = false;
-			} else if (!/^[^ ]+@[^ ]+\.[a-z]{2,3}$/.test(email)) {
-				document.getElementById("email-error").textContent = "Invalid email format.";
-				isValid = false;
-			}
-			if (!phone) {
-				document.getElementById("phone-error").textContent = "Phone number is required.";
-				isValid = false;
-			}
-			if (!subject) {
-				document.getElementById("subject-error").textContent = "Subject is required.";
-				isValid = false;
-			}
-			if (!message) {
-				document.getElementById("message-error").textContent = "Message is required.";
-				isValid = false;
-			}
-
-			if (!isValid) return;
-
-			// Get current date and time
+		
+			// Format date and time
 			const now = new Date();
-			const options = { year: 'numeric', month: 'long', day: 'numeric' };
+			const date = now.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
 			const time = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
-			const date = now.toLocaleDateString('en-IN', options);
-
-			// Format WhatsApp message
-			const whatsappMessage =
-				`*-----New Inquiry-----*%0A` +
-				`*Date:* ${encodeURIComponent(date)}%0A` +
-				`*Time:* ${encodeURIComponent(time)}%0A` +
-				`*----------------------------------*%0A` +
-				`*Name:* ${encodeURIComponent(name)}%0A` +
-				`*Email:* ${encodeURIComponent(email)}%0A` +
-				`*Phone:* ${encodeURIComponent(phone)}%0A` +
-				`*Subject:* ${encodeURIComponent(subject)}%0A` +
-				`*Message:* ${encodeURIComponent(message)}`;
-
-			const whatsappURL = `https://api.whatsapp.com/send?phone=918600911136&text=${whatsappMessage}`;
-
+		
+			// WhatsApp message with clean formatting
+			const whatsappMessage = 
+				"*----- New Inquiry -----*%0A" +
+				"*Date:* " + encodeURIComponent(date) + "%0A" +
+				"*Time:* " + encodeURIComponent(time) + "%0A" +
+				"*-------------------------*%0A" +
+				"*Name:* " + encodeURIComponent(name) + "%0A" +
+				"*Email:* " + encodeURIComponent(email) + "%0A" +
+				"*Phone:* " + encodeURIComponent(phone) + "%0A" +
+				"*Subject:* " + encodeURIComponent(subject) + "%0A" +
+				"*Message:* " + encodeURIComponent(message);
+		
 			// Open WhatsApp in new tab
+			const whatsappURL = `https://api.whatsapp.com/send?phone=918600911136&text=${whatsappMessage}`;
 			window.open(whatsappURL, '_blank');
-
-			// Fallback: Submit to FormSubmit for email
+		
+			// Submit to FormSubmit
 			const form = document.getElementById('contact-form');
 			form.action = 'https://formsubmit.co/katefoodindustriespvtltd@yahoo.in';
 			form.method = 'POST';
-
-			// Hidden inputs for FormSubmit customization
-			const hiddenInputs = `
-		<input type="hidden" name="_captcha" value="false">
-		<input type="hidden" name="_template" value="table">
-		<input type="hidden" name="_autoresponse" value="Thank you for contacting Kate Food Industries. We’ll get back to you soon.">
-	`;
-			form.insertAdjacentHTML('beforeend', hiddenInputs);
-
-			// Submit the form silently
+		
+			// Add hidden inputs only once
+			if (!document.getElementById('_formsubmit-hidden')) {
+				const hiddenInputs = document.createElement('div');
+				hiddenInputs.id = '_formsubmit-hidden';
+				hiddenInputs.innerHTML = `
+					<input type="hidden" name="_captcha" value="false">
+					<input type="hidden" name="_template" value="table">
+					<input type="hidden" name="_autoresponse" value="Thank you for contacting Kate Food Industries. We’ll get back to you soon.">
+				`;
+				form.appendChild(hiddenInputs);
+			}
+		
 			form.submit();
-
-			// Optional message on screen
-			document.getElementById("statusMessage").textContent = "Thank you! Redirecting to WhatsApp...";
+		
+			// Optional status message
+			const statusEl = document.getElementById("statusMessage");
+			if (statusEl) statusEl.textContent = "Thank you! Redirecting to WhatsApp...";
 		}
-
-
-
-	</script>
+		</script>
+		
 
 </body>
 

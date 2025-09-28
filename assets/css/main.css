@@ -1306,6 +1306,11 @@ div.owl-controls div.owl-nav div:hover {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
+.cart-btn {
+  display: block;        /* makes each button full width, one below the other */
+  margin: 8px 0;         /* adds space between buttons */
+  text-align: center;    /* centers text/icon inside */
+}
 
 a.cart-btn {
   -webkit-transition: 0.3s;
@@ -1685,10 +1690,6 @@ div.owl-controls,
   background-image: url(../img/Gallery/box.webp);
 }
 
-.news-bg-2 {
-  background-image: url(../img/Gallery/chips3.webp);
-}
-
 .news-bg-3 {
   background-image: url(../img/Gallery/chips1.webp);
 }
@@ -1701,9 +1702,6 @@ div.owl-controls,
   background-image: url(../img/Gallery/man1.webp);
 }
 
-.news-bg-6 {
-  background-image: url(../img/Gallery/faral1.webp);
-}
 
 .news-bg-7 {
   background-image: url(../img/Gallery/pack.webp);
@@ -1713,16 +1711,9 @@ div.owl-controls,
   background-image: url(../img/Gallery/machine1.webp);
 }
 
-.news-bg-9 {
-  background-image: url(../img/Gallery/faral.webp);
-}
 
 .news-bg-10 {
   background-image: url(../img/Gallery/man.webp);
-}
-
-.news-bg-11 {
-  background-image: url(../img/Gallery/pack1.webp);
 }
 
 .news-bg-12 {
@@ -1737,9 +1728,6 @@ div.owl-controls,
   background-image: url(../img/Gallery/img2.webp);
 }
 
-.news-bg-15 {
-  background-image: url(../img/Gallery/pack.webp);
-}
 .news-bg-16 {
   background-image: url(../img/Gallery/machine1.webp);
 }
@@ -2696,22 +2684,26 @@ ul.social-link-team li a {
 }
 
 .product-image img {
-  width: auto;
-  height: auto;
-  /* background-size: cover; */
+  width: auto;          /* fills its container width */
+  height: auto;        /* equal height across all products */
+  object-fit: cover;    /* crops neatly, keeps aspect ratio */
   border-radius: 5px;
   margin-bottom: 20px;
+  display: block;
+  
+  aspect-ratio: 1 / 1;   /* makes perfect square */
+  overflow: hidden;      /* hides overflow parts */
 }
 
 .single-product-item h3 {
-  font-size: 25px;
+  font-size: 22px;
   font-weight: 600;
   margin-bottom: 10px;
 }
 
 p.product-price {
   font-family: 'Poppins', sans-serif;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
   margin-bottom: 15px;
   /* display: inline; */
@@ -2732,6 +2724,7 @@ a.cart-btn {
   background-color: #be210c;
   color: #fff;
   padding: 8px 15px;
+  
 }
 
 a.cart-btn i {

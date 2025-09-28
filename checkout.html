@@ -182,7 +182,7 @@
 							<thead>
 								<tr>
 									<th>Your Product</th>
-									<th style="text-align: center;">Quantity</th>
+									<th style="text-align: center;">Quantity (kg)</th>
 									<th>Total</th>
 								</tr>
 							</thead>
@@ -258,7 +258,8 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="footer-box about-widget">
 						<h2 class="widget-title">Address</h2>
-						<p>Gate No. 476 & 477, Near Cadbury Factory At Induri, Sangurdi Gaon, Maval, Pune - 410507, Maharashtra.</p>
+						<p>Gate No. 476 & 477, Near Cadbury Factory At Induri, Sangurdi Gaon, Maval, Pune - 410507,
+							Maharashtra.</p>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6">
@@ -354,9 +355,9 @@
 
 	<script>
 		function submitCheckoutForm(event) {
-			event.preventDefault(); // Prevent default form submission
-
-			// Get form values
+			event.preventDefault();
+		
+			// --- Collect Form Values ---
 			const name = document.getElementById("name").value.trim();
 			const email = document.getElementById("email").value.trim();
 			const address = document.getElementById("address").value.trim();
@@ -365,53 +366,45 @@
 			const subtotal = document.getElementById("subtotal").textContent.trim();
 			const shipping = document.getElementById("shipping").textContent.trim();
 			const total = document.getElementById("total").textContent.trim();
-
-			// Get current date and time
+		
+			// --- Date + Time ---
 			const now = new Date();
 			const date = now.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
 			const time = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
-
-			// Get product details
+		
+			// --- Collect Products ---
 			const productRows = document.querySelectorAll(".order-details-body tr");
-			let productDetails = "```\n";
-			productDetails += "-----------------------------\n";
-			productDetails += "Product     Qty   Total \n";
-			productDetails += "-----------------------------\n";
-
+			let productDetailsText = "-----------------------------\nProduct     Qty   Total\n-----------------------------\n";
+			let productArray = [];
 			productRows.forEach(row => {
 				const product = row.children[0].textContent.trim();
 				const quantity = row.children[1].textContent.trim();
 				const price = row.children[2].textContent.trim();
-				productDetails += `${product.padEnd(11)} ${quantity.padEnd(6)} ${price}\n`;
+		
+				productDetailsText += `${product.padEnd(11)} ${quantity.padEnd(6)} ${price}\n`;
+				productArray.push({ product, quantity, price });
 			});
-
-			productDetails += "-----------------------------\n```";
-
-			// Format WhatsApp message
+			productDetailsText += "-----------------------------";
+		
+			// --- WhatsApp ---
 			const whatsappMessage =
 				`*----- New Order Received -----*%0A` +
 				`*Date:* ${encodeURIComponent(date)}%0A` +
 				`*Time:* ${encodeURIComponent(time)}%0A` +
-				`*-------------------------------*%0A` +
 				`*👤 Name:* ${encodeURIComponent(name)}%0A` +
 				`*📧 Email:* ${encodeURIComponent(email)}%0A` +
 				`*📞 Phone:* ${encodeURIComponent(phone)}%0A` +
 				`*🏠 Address:* ${encodeURIComponent(address)}%0A` +
 				`*📝 Message:* ${encodeURIComponent(message)}%0A` +
-				`*📦 Order Details:*%0A${encodeURIComponent(productDetails)}%0A` +
+				`*📦 Order Details:*%0A${encodeURIComponent(productDetailsText)}%0A` +
 				`*Subtotal:* ${encodeURIComponent(subtotal)}%0A` +
 				`*Shipping:* ${encodeURIComponent(shipping)}%0A` +
 				`*Total:* ${encodeURIComponent(total)}`;
-
-			const whatsappURL = `https://api.whatsapp.com/send?phone=918600911136&text=${whatsappMessage}`;
-			window.open(whatsappURL, '_blank');
-
-			// Submit to FormSubmit
+		
+			window.open(`https://api.whatsapp.com/send?phone=918600911136&text=${whatsappMessage}`, '_blank');
+		
+			// --- FormSubmit Email ---
 			const form = document.getElementById('checkout-form');
-			form.action = 'https://formsubmit.co/katefoodindustriespvtltd@yahoo.in';
-			form.method = 'POST';
-
-			// Add hidden fields
 			const hiddenInputs = [
 				{ name: "Date", value: date },
 				{ name: "Time", value: time },
@@ -423,12 +416,11 @@
 				{ name: "Subtotal", value: subtotal },
 				{ name: "Shipping", value: shipping },
 				{ name: "Total", value: total },
-				{ name: "Products", value: productDetails },
+				{ name: "Products", value: productDetailsText },
 				{ name: "_captcha", value: "false" },
 				{ name: "_template", value: "table" },
 				{ name: "_autoresponse", value: "Thank you for your order with Kate Food Industries. We will process it shortly." }
 			];
-
 			hiddenInputs.forEach(field => {
 				const input = document.createElement('input');
 				input.type = 'hidden';
@@ -436,13 +428,55 @@
 				input.value = field.value;
 				form.appendChild(input);
 			});
-
-			form.submit(); // Send form
+			fetch('https://formsubmit.co/katefoodindustriespvtltd@yahoo.in', { method: 'POST', body: new FormData(form) });
+		
+			// --- Google Sheets ---
+			const scriptURL = "https://script.google.com/macros/s/AKfycbylpUjILNkRSKIjgZjBu7qM6RLJKdCbFuFnMJ2YXHTIPjhYmQiW-J6TuchLVv-XS3TUdg/exec"; 
+			fetch(scriptURL, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					date: date,
+					time: time,
+					name, email, phone, address, message,
+					subtotal, shipping, total,
+					products: productArray
+				})
+			}).then(res => res.json())
+			  .then(data => console.log("Sheet response:", data))
+			  .catch(err => console.error("Sheet error:", err));
+		
+			// ✅ Show success popup
+			showSuccessPopup();
 		}
-
-
-	</script>
-
+		
+		// --- Success Popup ---
+		function showSuccessPopup() {
+			const popup = document.createElement("div");
+			popup.id = "successPopup";
+			popup.style.cssText = `
+				position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+				background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center;
+				z-index: 9999;
+			`;
+			const inner = document.createElement("div");
+			inner.style.cssText = `
+				background: #fff; padding: 20px 30px; border-radius: 10px;
+				text-align: center; max-width: 300px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+			`;
+			inner.innerHTML = `
+				<h4 style="color: green; margin-bottom: 10px;">✅ Order Placed!</h4>
+				<p style="font-size: 14px;">Thank you for your order.<br>We will process it shortly.</p>
+				<button id="popupOkBtn" style="
+					margin-top: 10px; padding: 8px 15px; background: green; color: white;
+					border: none; border-radius: 5px; cursor: pointer;">OK</button>
+			`;
+			popup.appendChild(inner);
+			document.body.appendChild(popup);
+			document.getElementById("popupOkBtn").addEventListener("click", () => popup.remove());
+		}
+		</script>
+		
 
 </body>
 
