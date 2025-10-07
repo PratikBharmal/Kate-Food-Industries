@@ -13,7 +13,8 @@
 
 	<!-- Robots Meta Tag -->
 	<meta name="robots" content="index, follow">
-
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+	
 	<!-- SEO Keywords -->
 	<meta name="keywords"
 		content="Kate Food Industries, food manufacturing Pune, buy snacks online, packaged food products India, premium snacks Pune, food supplier Maharashtra, organic food products, healthy snacks, namkeen online, eCommerce food website India">
@@ -644,7 +645,12 @@
 	<script src="assets/js/sticker.js"></script>
 	<!-- main js -->
 	<script src="assets/js/main.js"></script>
-
+	<script>
+		if(window.location.protocol === 'http:'){
+		  window.location.href = window.location.href.replace('http:', 'https:');
+		}
+	  </script>
+	  
 </body>
 
 </html>

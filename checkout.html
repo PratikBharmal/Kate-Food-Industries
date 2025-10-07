@@ -6,6 +6,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
+	<meta name="robots" content="index, follow">
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
 	<!-- Meta Description for SEO -->
 	<meta name="description"
 		content="Complete your purchase of high-quality snacks and food products from Kate Food Industries. Enjoy secure checkout, fast delivery, and trusted service from Pune's premium food brand.">
@@ -108,7 +111,8 @@
 						<!-- logo -->
 						<div class="site-logo">
 							<a href="index.html">
-								<img src="assets/img/company-logos/katemegap1.webp" loading="lazy" alt="Family farm logo">
+								<img src="assets/img/company-logos/katemegap1.webp" loading="lazy"
+									alt="Family farm logo">
 							</a>
 						</div>
 						<!-- logo -->
@@ -356,7 +360,7 @@
 	<script>
 		function submitCheckoutForm(event) {
 			event.preventDefault();
-		
+
 			// --- Collect Form Values ---
 			const name = document.getElementById("name").value.trim();
 			const email = document.getElementById("email").value.trim();
@@ -366,12 +370,12 @@
 			const subtotal = document.getElementById("subtotal").textContent.trim();
 			const shipping = document.getElementById("shipping").textContent.trim();
 			const total = document.getElementById("total").textContent.trim();
-		
+
 			// --- Date + Time ---
 			const now = new Date();
 			const date = now.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
 			const time = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
-		
+
 			// --- Collect Products ---
 			const productRows = document.querySelectorAll(".order-details-body tr");
 			let productDetailsText = "-----------------------------\nProduct     Qty   Total\n-----------------------------\n";
@@ -380,12 +384,12 @@
 				const product = row.children[0].textContent.trim();
 				const quantity = row.children[1].textContent.trim();
 				const price = row.children[2].textContent.trim();
-		
+
 				productDetailsText += `${product.padEnd(11)} ${quantity.padEnd(6)} ${price}\n`;
 				productArray.push({ product, quantity, price });
 			});
 			productDetailsText += "-----------------------------";
-		
+
 			// --- WhatsApp ---
 			const whatsappMessage =
 				`*----- New Order Received -----*%0A` +
@@ -400,9 +404,9 @@
 				`*Subtotal:* ${encodeURIComponent(subtotal)}%0A` +
 				`*Shipping:* ${encodeURIComponent(shipping)}%0A` +
 				`*Total:* ${encodeURIComponent(total)}`;
-		
+
 			window.open(`https://api.whatsapp.com/send?phone=918600911136&text=${whatsappMessage}`, '_blank');
-		
+
 			// --- FormSubmit Email ---
 			const form = document.getElementById('checkout-form');
 			const hiddenInputs = [
@@ -429,9 +433,9 @@
 				form.appendChild(input);
 			});
 			fetch('https://formsubmit.co/katefoodindustriespvtltd@yahoo.in', { method: 'POST', body: new FormData(form) });
-		
+
 			// --- Google Sheets ---
-			const scriptURL = "https://script.google.com/macros/s/AKfycbylpUjILNkRSKIjgZjBu7qM6RLJKdCbFuFnMJ2YXHTIPjhYmQiW-J6TuchLVv-XS3TUdg/exec"; 
+			const scriptURL = "https://script.google.com/macros/s/AKfycbylpUjILNkRSKIjgZjBu7qM6RLJKdCbFuFnMJ2YXHTIPjhYmQiW-J6TuchLVv-XS3TUdg/exec";
 			fetch(scriptURL, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
@@ -443,13 +447,13 @@
 					products: productArray
 				})
 			}).then(res => res.json())
-			  .then(data => console.log("Sheet response:", data))
-			  .catch(err => console.error("Sheet error:", err));
-		
+				.then(data => console.log("Sheet response:", data))
+				.catch(err => console.error("Sheet error:", err));
+
 			// ✅ Show success popup
 			showSuccessPopup();
 		}
-		
+
 		// --- Success Popup ---
 		function showSuccessPopup() {
 			const popup = document.createElement("div");
@@ -475,8 +479,13 @@
 			document.body.appendChild(popup);
 			document.getElementById("popupOkBtn").addEventListener("click", () => popup.remove());
 		}
-		</script>
-		
+	</script>
+
+	<script>
+		if (window.location.protocol === 'http:') {
+			window.location.href = window.location.href.replace('http:', 'https:');
+		}
+	</script>
 
 </body>
 

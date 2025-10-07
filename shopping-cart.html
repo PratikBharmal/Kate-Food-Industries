@@ -6,6 +6,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
+	<meta name="robots" content="index, follow">
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
 	<!-- Meta Description for SEO -->
 	<meta name="description"
 		content="Order fresh, organic strawberries directly from Family Farm in Nanavade, near Bhimashankar, Pune. Enjoy secure checkout, fast delivery, and farm-fresh quality straight to your door.">
@@ -123,7 +126,8 @@
 						<!-- logo -->
 						<div class="site-logo">
 							<a href="index.html">
-								<img src="assets/img/company-logos/katemegap1.webp" loading="lazy" alt="Family farm logo">
+								<img src="assets/img/company-logos/katemegap1.webp" loading="lazy"
+									alt="Family farm logo">
 							</a>
 						</div>
 						<!-- logo -->
@@ -204,7 +208,8 @@
 										<td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a>
 										</td>
 										<td class="product-image-cart">
-											<img src="assets/img/products/s3.webp" loading="lazy" alt="Strawberry image">
+											<img src="assets/img/products/s3.webp" loading="lazy"
+												alt="Strawberry image">
 										</td>
 										<td class="product-name">Strawberry</td>
 										<td class="product-price">$85</td>
@@ -266,7 +271,8 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="footer-box about-widget">
 						<h2 class="widget-title">Address</h2>
-						<p>Gate No. 476 & 477, Near Cadbury Factory At Induri, Sangurdi Gaon, Maval, Pune - 410507, Maharashtra.</p>
+						<p>Gate No. 476 & 477, Near Cadbury Factory At Induri, Sangurdi Gaon, Maval, Pune - 410507,
+							Maharashtra.</p>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6">
@@ -359,6 +365,12 @@
 	<script src="assets/js/sticker.js"></script>
 	<!-- main js -->
 	<script src="assets/js/main.js"></script>
+
+	<script>
+		if (window.location.protocol === 'http:') {
+			window.location.href = window.location.href.replace('http:', 'https:');
+		}
+	</script>
 
 </body>
 

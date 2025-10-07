@@ -13,6 +13,7 @@
 
 
 	<meta name="robots" content="index, follow">
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
 	<!-- Meta Author for SEO -->
 	<meta name="author" content="Family Farm">
@@ -145,7 +146,8 @@
 						<!-- logo -->
 						<div class="site-logo">
 							<a href="index.html">
-								<img src="assets/img/company-logos/katemegap1.webp" loading="lazy" alt="Family farm logo">
+								<img src="assets/img/company-logos/katemegap1.webp" loading="lazy"
+									alt="Family farm logo">
 							</a>
 						</div>
 						<!-- logo -->
@@ -186,7 +188,7 @@
 						<a class="mobile-show shopping-cart" href="shopping-cart.html"><i class="fas fa-shopping-cart"
 								data-count="0"></i></a>
 						<div class="mobile-menu"></div>
-						
+
 						<!-- menu end -->
 					</div>
 				</div>
@@ -249,7 +251,8 @@
 					<div class="contact-form-wrap">
 						<div class="contact-form-box">
 							<h4><i class="fas fa-map"></i>Address</h4>
-							<p>Gate No. 476 & 477, Near Cadbury Factory At Induri, Sangurdi Gaon, Maval, Pune - 410507, Maharashtra.</p>
+							<p>Gate No. 476 & 477, Near Cadbury Factory At Induri, Sangurdi Gaon, Maval, Pune - 410507,
+								Maharashtra.</p>
 						</div>
 						<div class="contact-form-box">
 							<h4><i class="far fa-clock"></i> Open Hours</h4>
@@ -350,7 +353,8 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="footer-box about-widget">
 						<h2 class="widget-title">Address</h2>
-						<p>Gate No. 476 & 477, Near Cadbury Factory At Induri, Sangurdi Gaon, Maval, Pune - 410507, Maharashtra.</p>
+						<p>Gate No. 476 & 477, Near Cadbury Factory At Induri, Sangurdi Gaon, Maval, Pune - 410507,
+							Maharashtra.</p>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6">
@@ -449,21 +453,21 @@
 	<script>
 		function submitForm(event) {
 			event.preventDefault();
-		
+
 			// Get field values
 			const name = document.getElementById("name").value.trim();
 			const email = document.getElementById("email").value.trim();
 			const phone = document.getElementById("phone").value.trim();
 			const subject = document.getElementById("subject").value.trim();
 			const message = document.getElementById("message").value.trim();
-		
+
 			// Format date and time
 			const now = new Date();
 			const date = now.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
 			const time = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
-		
+
 			// WhatsApp message with clean formatting
-			const whatsappMessage = 
+			const whatsappMessage =
 				"*----- New Inquiry -----*%0A" +
 				"*Date:* " + encodeURIComponent(date) + "%0A" +
 				"*Time:* " + encodeURIComponent(time) + "%0A" +
@@ -473,16 +477,16 @@
 				"*Phone:* " + encodeURIComponent(phone) + "%0A" +
 				"*Subject:* " + encodeURIComponent(subject) + "%0A" +
 				"*Message:* " + encodeURIComponent(message);
-		
+
 			// Open WhatsApp in new tab
 			const whatsappURL = `https://api.whatsapp.com/send?phone=918600911136&text=${whatsappMessage}`;
 			window.open(whatsappURL, '_blank');
-		
+
 			// Submit to FormSubmit
 			const form = document.getElementById('contact-form');
 			form.action = 'https://formsubmit.co/katefoodindustriespvtltd@yahoo.in';
 			form.method = 'POST';
-		
+
 			// Add hidden inputs only once
 			if (!document.getElementById('_formsubmit-hidden')) {
 				const hiddenInputs = document.createElement('div');
@@ -494,15 +498,15 @@
 				`;
 				form.appendChild(hiddenInputs);
 			}
-		
+
 			form.submit();
-		
+
 			// Optional status message
 			const statusEl = document.getElementById("statusMessage");
 			if (statusEl) statusEl.textContent = "Thank you! Redirecting to WhatsApp...";
 		}
-		</script>
-		
+	</script>
+
 
 </body>
 
